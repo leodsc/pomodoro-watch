@@ -1,0 +1,41 @@
+@import "_variables";
+@import "_mixins";
+
+.btn-ctn {
+  padding: 1rem 0;
+  width: 100px;
+  font-size: 1rem;
+  font-weight: 600;
+  color: white;
+  position: relative;
+}
+
+.btn-ctn:active {
+  transform: translateY(5px);
+}
+
+.btn-color,
+.detail {
+  &__blue {
+    background-color: $blue;
+  }
+
+  &__purple {
+    background-color: $purple;
+  }
+
+  &__red {
+    background-color: $red;
+  }
+
+  &__light-blue {
+    background-color: $light-blue;
+  }
+}
+
+.detail {
+  position: absolute;
+  width: 100px;
+  height: 10px;
+  opacity: 0.5;
+}

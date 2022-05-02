@@ -1,0 +1,45 @@
+<app-message
+  text="Não é possível clicar nesse botão sem iniciar o temporizador!"
+></app-message>
+<main class="initial-page">
+  <section class="btn-ctn center">
+    <app-button
+      (click)="changeTime('05:00')"
+      text="Pequeno"
+      color="purple"
+    ></app-button>
+    <app-button
+      (click)="changeTime('25:00')"
+      text="Padrão"
+      color="blue"
+    ></app-button>
+    <app-button
+      (click)="changeTime('50:00')"
+      text="Grande"
+      color="red"
+    ></app-button>
+  </section>
+  <section class="watch-ctn">
+    <h2 class="time">{{ currentTime }}</h2>
+    <div [class]="'watch ' + animation">
+      <button (click)="watch.isRunning ? pauseTimer() : startTimer()">
+        <img class="watch-icon" [src]="icon" alt="" />
+      </button>
+    </div>
+    <section class="center">
+      <app-button
+        (click)="restart()"
+        color="light-blue"
+        text="Reiniciar"
+      ></app-button>
+      <app-button (click)="stop()" text="Parar" color="light-blue"></app-button>
+    </section>
+  </section>
+</main>
+<!-- <footer>
+  <div>
+    Icons made by
+    <a href="https://www.freepik.com" title="Freepik"> Freepik </a> from
+    <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com'</a>
+  </div>
+</footer> -->
