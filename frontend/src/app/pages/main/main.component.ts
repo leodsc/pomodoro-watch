@@ -11,7 +11,7 @@ import p5 from 'p5';
   styleUrls: ['./main.component.scss'],
 })
 export class MainComponent implements OnInit {
-  currentTime = '00:05';
+  currentTime = '25:00';
   animation: string = 'button-animation--off';
   icon = 'assets/play.png';
   showMessage = false;
