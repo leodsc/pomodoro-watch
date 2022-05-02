@@ -21,12 +21,15 @@
   </section>
   <section class="watch-ctn">
     <h2 class="time">{{ currentTime }}</h2>
-    <div [class]="'watch ' + animation">
-      <button (click)="watch.isRunning ? pauseTimer() : startTimer()">
+    <div id="watch" class="watch">
+      <button
+        [class]="animation"
+        (click)="watch.isRunning ? pauseTimer() : startTimer()"
+      >
         <img class="watch-icon" [src]="icon" alt="" />
       </button>
     </div>
-    <section class="center">
+    <section class="center btns">
       <app-button
         (click)="restart()"
         color="light-blue"

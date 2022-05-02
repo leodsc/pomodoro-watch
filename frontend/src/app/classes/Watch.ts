@@ -5,11 +5,14 @@ export class Watch {
   private minutes: number;
   private hours: number;
   private initialTime: string;
+  private initialTimeTotalSeconds: number;
   private timer: any;
   private timeRemainingSource = new Subject<string>();
 
   public isRunning: boolean;
   public timeRemaining = this.timeRemainingSource.asObservable();
+  public timeEllapsed: number;
+  public stopped: boolean;
 
   constructor(time: string) {
     this.setTime(time);
@@ -17,6 +20,7 @@ export class Watch {
 
   start() {
     this.isRunning = true;
+    this.stopped = false;
     this.timer = setInterval(() => {
       this.decreaseOneSecond();
       let seconds = `${this.seconds}`;
@@ -42,6 +46,8 @@ export class Watch {
     clearTimeout(this.timer);
     this.timeRemainingSource.next(this.initialTime);
     this.setTime(this.initialTime);
+    this.stopped = true;
+    this.timeEllapsed = 1;
   }
 
   restart() {
@@ -60,6 +66,7 @@ export class Watch {
     } else {
       this.seconds -= 1;
     }
+    this.calculateTimeEllapsed();
   }
 
   alarm() {
@@ -72,5 +79,13 @@ export class Watch {
     this.minutes = Number(timeArray[0]);
     this.hours = Number(timeArray[0]);
     this.initialTime = time;
+    this.initialTimeTotalSeconds = this.minutes * 60 + this.seconds;
+  }
+
+  private calculateTimeEllapsed() {
+    let secondsEllapsed =
+      this.initialTimeTotalSeconds - (this.minutes * 60 + this.seconds);
+    this.timeEllapsed = secondsEllapsed / this.initialTimeTotalSeconds;
+    console.log(this.timeEllapsed);
   }
 }

@@ -9,7 +9,21 @@ $box-shadow-3d: 0 0 0px 4px rgba(255, 255, 255, 0.25);
 }
 
 .watch-ctn {
-  @include flexCtn(column, center, center, 2rem);
+  @include flexCtn(column, center, center, 4rem);
+}
+
+.watch-icon {
+  position: relative;
+  z-index: 1000;
+  top: 10px;
+}
+
+#watch {
+  position: relative;
+}
+
+.btns {
+  margin-top: 2rem;
 }
 
 .time {
@@ -20,6 +34,7 @@ $box-shadow-3d: 0 0 0px 4px rgba(255, 255, 255, 0.25);
 .center {
   @include flexCtn(row, center, center, 1rem);
 }
+
 .button-animation {
   &--off {
     animation-name: none;
