@@ -11,11 +11,12 @@ import p5 from 'p5';
   styleUrls: ['./main.component.scss'],
 })
 export class MainComponent implements OnInit {
-  currentTime = '25:00';
+  currentTime = '00:05';
   animation: string = 'button-animation--off';
   icon = 'assets/play.png';
   showMessage = false;
   private p5: any;
+  @ViewChild('alarm') alarm: any;
   public readonly watch = new Watch(this.currentTime);
 
   constructor(private messageService: MessageService) {}
@@ -25,6 +26,7 @@ export class MainComponent implements OnInit {
       this.currentTime = value;
       if (this.currentTime == '00:00') {
         this.watch.isRunning = false;
+        this.alarm.nativeElement.play();
         this.toggleAnimation('assets/play.png');
       }
     });
