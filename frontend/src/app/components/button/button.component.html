@@ -1,4 +1,6 @@
-<button (click)="(clickEvent)" [class]="'btn-color__' + color + ' btn-ctn'">
-  {{ btnText }}
-</button>
-<div [class]="'detail detail__' + color"></div>
+<div (click)="pushed !== undefined ? changeCurrentButton() : null">
+  <button #button [class]="'btn-color__' + color + ' btn-ctn'">
+    {{ btnText }}
+  </button>
+  <div [class]="'detail detail__' + color"></div>
+</div>

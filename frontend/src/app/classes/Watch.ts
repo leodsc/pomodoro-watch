@@ -6,13 +6,14 @@ export class Watch {
   private hours: number;
   private initialTime: string;
   private initialTimeTotalSeconds: number;
-  private timer: any;
+  private timer: ReturnType<typeof setTimeout>;
   private timeRemainingSource = new Subject<string>();
+  private audio = new Audio('assets/alarm.mp4');
 
   public isRunning: boolean;
   public timeRemaining = this.timeRemainingSource.asObservable();
   public timeEllapsed: number;
-  public stopped: boolean;
+  public stopped: boolean = true;
 
   constructor(time: string) {
     this.setTime(time);
@@ -71,6 +72,7 @@ export class Watch {
 
   alarm() {
     this.stop();
+    this.audio.play();
   }
 
   setTime(time: string) {

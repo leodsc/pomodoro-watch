@@ -1,6 +1,9 @@
 <div *ngIf="messageService.showMessage" [class]="position + ' message-ctn'">
   <p class="message-text">
-    {{ text }}
+    {{ messageService.message }}
   </p>
-  <button class="message-close" (click)="messageService.send(false)"></button>
+  <button
+    class="message-close"
+    (click)="messageService.showMessage = false"
+  ></button>
 </div>

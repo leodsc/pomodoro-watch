@@ -1,20 +1,20 @@
-<app-message
-  text="Não é possível clicar nesse botão sem iniciar o temporizador!"
-></app-message>
-<audio #alarm src="assets/alarm.mp4"></audio>
+<app-message></app-message>
 <main class="initial-page">
   <section class="btn-ctn center">
     <app-button
       (click)="changeTime('05:00')"
+      [pushed]="false"
       text="Pequeno"
       color="purple"
     ></app-button>
     <app-button
       (click)="changeTime('25:00')"
+      [pushed]="true"
       text="Padrão"
       color="blue"
     ></app-button>
     <app-button
+      [pushed]="false"
       (click)="changeTime('50:00')"
       text="Grande"
       color="red"

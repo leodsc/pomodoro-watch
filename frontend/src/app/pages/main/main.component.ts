@@ -2,7 +2,6 @@ import { i18nMetaToJSDoc } from '@angular/compiler/src/render3/view/i18n/meta';
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { Watch } from 'app/classes/Watch';
 import { MessageService } from 'app/services/message.service';
-import 'p5';
 import p5 from 'p5';
 
 @Component({
@@ -11,12 +10,12 @@ import p5 from 'p5';
   styleUrls: ['./main.component.scss'],
 })
 export class MainComponent implements OnInit {
-  currentTime = '00:05';
+  currentTime = '25:00';
   animation: string = 'button-animation--off';
   icon = 'assets/play.png';
   showMessage = false;
-  private p5: any;
-  @ViewChild('alarm') alarm: any;
+  buttonSound = new Audio('assets/button-click.ogg');
+  canvas: any = null;
   public readonly watch = new Watch(this.currentTime);
 
   constructor(private messageService: MessageService) {}
@@ -26,18 +25,19 @@ export class MainComponent implements OnInit {
       this.currentTime = value;
       if (this.currentTime == '00:00') {
         this.watch.isRunning = false;
-        this.alarm.nativeElement.play();
+        this.watch.alarm();
         this.toggleAnimation('assets/play.png');
       }
     });
   }
 
   private createCanvas = () => {
-    this.p5 = new p5(this.sketch);
+    new p5(this.sketch);
   };
 
   private sketch = (p: any) => {
     let canvas: any;
+    this.canvas = p;
     p.setup = () => {
       canvas = p.createCanvas(275, 275);
     };
@@ -71,11 +71,14 @@ export class MainComponent implements OnInit {
   changeTime(time: string) {
     this.currentTime = time;
     this.watch.setTime(time);
+    this.buttonSound.play();
   }
 
   startTimer() {
+    if (this.canvas === null) {
+      this.createCanvas();
+    }
     this.watch.start();
-    this.createCanvas();
     this.toggleAnimation('assets/pause.png');
   }
 
@@ -99,16 +102,21 @@ export class MainComponent implements OnInit {
   }
 
   restart() {
-    this.watch.restart();
-    this.toggleAnimation('assets/pause.png');
+    if (this.watch.stopped) {
+      this.messageService.send(
+        'Não é possível reiniciar o relógio com ele parado!'
+      );
+    } else {
+      this.watch.restart();
+      this.toggleAnimation('assets/pause.png');
+    }
   }
 
   stop() {
-    if (this.watch.isRunning) {
-      this.watch.stop();
+    if (!this.watch.stopped) {
       this.toggleAnimation('assets/play.png');
-    } else {
-      this.messageService.send(true);
     }
+    this.watch.stop();
+    this.canvas = null;
   }
 }

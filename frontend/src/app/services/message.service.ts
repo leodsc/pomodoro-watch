@@ -5,10 +5,12 @@ import { Injectable } from '@angular/core';
 })
 export class MessageService {
   showMessage = false;
+  message: string;
 
   constructor() {}
 
-  send(status: boolean) {
-    this.showMessage = status;
+  send(message: string) {
+    this.showMessage = true;
+    this.message = message;
   }
 }
