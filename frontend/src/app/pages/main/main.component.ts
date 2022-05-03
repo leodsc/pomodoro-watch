@@ -1,8 +1,7 @@
-import { i18nMetaToJSDoc } from '@angular/compiler/src/render3/view/i18n/meta';
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { TimerCircle } from 'app/classes/TimerCircle';
 import { Watch } from 'app/classes/Watch';
 import { MessageService } from 'app/services/message.service';
-import p5 from 'p5';
 
 @Component({
   selector: 'app-main',
@@ -17,6 +16,7 @@ export class MainComponent implements OnInit {
   buttonSound = new Audio('assets/button-click.ogg');
   canvas: any = null;
   public readonly watch = new Watch(this.currentTime);
+  private readonly timerCircle = new TimerCircle(this.watch);
 
   constructor(private messageService: MessageService) {}
 
@@ -31,43 +31,6 @@ export class MainComponent implements OnInit {
     });
   }
 
-  private createCanvas = () => {
-    new p5(this.sketch);
-  };
-
-  private sketch = (p: any) => {
-    let canvas: any;
-    this.canvas = p;
-    p.setup = () => {
-      canvas = p.createCanvas(275, 275);
-    };
-
-    p.draw = () => {
-      const rotation = (3 * p.PI) / 2;
-      p.clear();
-      let c = p.color(92, 184, 92);
-      p.stroke(c);
-      p.noFill();
-      p.strokeWeight(10);
-      p.translate(p.width / 48, p.height);
-      p.rotate(rotation + 0.01);
-      p.arc(
-        p.width / 2,
-        p.height / 2,
-        250,
-        250,
-        0,
-        p.TWO_PI - p.TWO_PI * this.watch.timeEllapsed
-      );
-      canvas.parent('watch');
-      canvas.position(-78, -65);
-
-      if (this.watch.stopped) {
-        p.remove();
-      }
-    };
-  };
-
   changeTime(time: string) {
     this.currentTime = time;
     this.watch.setTime(time);
@@ -75,8 +38,8 @@ export class MainComponent implements OnInit {
   }
 
   startTimer() {
-    if (this.canvas === null) {
-      this.createCanvas();
+    if (!this.timerCircle.exists()) {
+      this.timerCircle.createCanvas();
     }
     this.watch.start();
     this.toggleAnimation('assets/pause.png');
@@ -117,6 +80,6 @@ export class MainComponent implements OnInit {
       this.toggleAnimation('assets/play.png');
     }
     this.watch.stop();
-    this.canvas = null;
+    this.timerCircle.remove();
   }
 }
