@@ -1,6 +1,13 @@
 @import "_variables";
 @import "_mixins";
 
+$buttonColors: (
+  "purple": $purple,
+  "red": $red,
+  "blue": $blue,
+  "light-blue": $light-blue,
+);
+
 .btn-ctn {
   padding: 1rem 0;
   width: 100px;
@@ -10,26 +17,12 @@
   position: relative;
 }
 
-.btn-ctn:active {
-  transform: translateY(5px);
-}
-
 .btn-color,
 .detail {
-  &__blue {
-    background-color: $blue;
-  }
-
-  &__purple {
-    background-color: $purple;
-  }
-
-  &__red {
-    background-color: $red;
-  }
-
-  &__light-blue {
-    background-color: $light-blue;
+  @each $color, $value in $buttonColors {
+    &__#{$color} {
+      background-color: $value;
+    }
   }
 }
 

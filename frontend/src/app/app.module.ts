@@ -6,19 +6,20 @@ import { AppComponent } from './app.component';
 import { MainComponent } from './pages/main/main.component';
 import { ButtonComponent } from './components/button/button.component';
 import { MessageComponent } from './components/message/message.component';
+import { HeaderComponent } from './components/header/header.component';
+import { LoginComponent } from './pages/login/login.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     MainComponent,
     ButtonComponent,
-    MessageComponent
+    MessageComponent,
+    HeaderComponent,
+    LoginComponent,
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule
-  ],
+  imports: [BrowserModule, AppRoutingModule],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

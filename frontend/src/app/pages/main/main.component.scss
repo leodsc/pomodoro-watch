@@ -5,7 +5,7 @@ $box-shadow-3d: 0 0 0px 4px rgba(255, 255, 255, 0.25);
 
 .initial-page {
   @include flexCtn(column, none, none, 5rem);
-  height: 100%;
+  height: 80%;
 }
 
 .watch-ctn {
@@ -14,7 +14,7 @@ $box-shadow-3d: 0 0 0px 4px rgba(255, 255, 255, 0.25);
 
 .watch-icon {
   position: relative;
-  z-index: 1000;
+  z-index: 300;
   top: 10px;
 }
 
