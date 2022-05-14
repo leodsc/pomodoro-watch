@@ -10,7 +10,7 @@
   font-family: $openSans;
   background-color: transparent;
   border: none;
-  outline-offset: 4px;
+  outline: none;
   list-style-type: none;
   list-style-position: inside;
   text-decoration: none;
@@ -27,6 +27,11 @@ button {
 
 body {
   background-color: $dark;
+}
+
+main {
+  // prevent page to overlap header
+  padding-top: 7rem;
 }
 
 .page-blocker {

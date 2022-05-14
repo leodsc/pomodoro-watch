@@ -1,44 +1,50 @@
 <app-message></app-message>
 <main class="initial-page">
-  <section class="btn-ctn center">
-    <app-button
-      (click)="changeTime('05:00')"
-      [pushed]="false"
-      text="Pequeno"
-      color="purple"
-    ></app-button>
-    <app-button
-      (click)="changeTime('25:00')"
-      [pushed]="true"
-      text="Padrão"
-      color="blue"
-    ></app-button>
-    <app-button
-      [pushed]="false"
-      (click)="changeTime('50:00')"
-      text="Grande"
-      color="red"
-    ></app-button>
-  </section>
-  <section class="watch-ctn">
-    <h2 class="time">{{ currentTime }}</h2>
-    <div id="watch" class="watch">
-      <button
-        [class]="animation"
-        (click)="watch.isRunning ? pauseTimer() : startTimer()"
-      >
-        <img class="watch-icon" [src]="icon" alt="" />
-      </button>
-    </div>
-    <section class="center btns">
+  <article class="initial-page-ctn">
+    <section class="btn-ctn center">
       <app-button
-        (click)="restart()"
-        color="light-blue"
-        text="Reiniciar"
+        (click)="changeTime('05:00')"
+        [pushed]="false"
+        text="Pequeno"
+        color="purple"
       ></app-button>
-      <app-button (click)="stop()" text="Parar" color="light-blue"></app-button>
+      <app-button
+        (click)="changeTime('25:00')"
+        [pushed]="true"
+        text="Padrão"
+        color="blue"
+      ></app-button>
+      <app-button
+        [pushed]="false"
+        (click)="changeTime('50:00')"
+        text="Grande"
+        color="red"
+      ></app-button>
     </section>
-  </section>
+    <section class="watch-ctn">
+      <h2 class="time">{{ currentTime }}</h2>
+      <div id="watch" class="watch">
+        <button
+          [class]="animation"
+          (click)="watch.isRunning ? pauseTimer() : startTimer()"
+        >
+          <img class="watch-icon" [src]="icon" alt="" />
+        </button>
+      </div>
+      <section class="center btns">
+        <app-button
+          (click)="restart()"
+          color="light-blue"
+          text="Reiniciar"
+        ></app-button>
+        <app-button
+          (click)="stop()"
+          text="Parar"
+          color="light-blue"
+        ></app-button>
+      </section>
+    </section>
+  </article>
 </main>
 <!-- <footer>
   <div>

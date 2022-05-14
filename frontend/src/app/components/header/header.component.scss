@@ -7,13 +7,20 @@ $icons: (
 );
 
 .header {
+  position: absolute;
   padding-top: 0.5rem;
   padding-left: 0.5rem;
   padding-bottom: 0.5rem;
-  margin-bottom: 2rem;
   border-bottom: 3px solid rgba(0, 0, 0, 0.25);
-  @include flexCtn(row, center, flex-start, 0);
+  @include flexCtn(row, center, center, 0);
   height: 75px;
+  width: 100vw;
+  background-color: #2f374a;
+
+  &-ctn {
+    @include maximumContainerSize($mobile);
+  }
+
   &__button {
     position: relative;
     z-index: 500;

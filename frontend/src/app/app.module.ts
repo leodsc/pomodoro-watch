@@ -8,6 +8,13 @@ import { ButtonComponent } from './components/button/button.component';
 import { MessageComponent } from './components/message/message.component';
 import { HeaderComponent } from './components/header/header.component';
 import { LoginComponent } from './pages/login/login.component';
+import { SignupComponent } from './pages/signup/signup.component';
+import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
+import { FormValidationComponent } from './components/form-validation/form-validation.component';
+
+import { EmailvalidatorDirective } from './directives/validation/emailvalidator.directive';
+import { PasswordValidatorDirective } from './directives/validation/password-validator.directive';
 
 @NgModule({
   declarations: [
@@ -17,8 +24,12 @@ import { LoginComponent } from './pages/login/login.component';
     MessageComponent,
     HeaderComponent,
     LoginComponent,
+    SignupComponent,
+    FormValidationComponent,
+    EmailvalidatorDirective,
+    PasswordValidatorDirective,
   ],
-  imports: [BrowserModule, AppRoutingModule],
+  imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
   providers: [],
   bootstrap: [AppComponent],
 })

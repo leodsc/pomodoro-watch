@@ -1,0 +1,10 @@
+@import "_mixins";
+@import "forms.scss";
+
+.login-page {
+  @include flexCtn(column, center, center, 1rem);
+  background: url("../../../assets/login-background.png") no-repeat;
+  background-size: cover;
+  background-position: center;
+  height: 100%;
+}

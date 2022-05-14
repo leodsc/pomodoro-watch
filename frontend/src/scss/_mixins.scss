@@ -1,7 +1,21 @@
+@import "_variables";
+
 @mixin flexCtn($direction, $align, $justify, $gap) {
   display: flex;
   flex-direction: $direction;
   align-items: $align;
   justify-content: $justify;
   gap: $gap;
+}
+
+@mixin maximumContainerSize($screen) {
+  @if $screen == $mobile {
+    max-width: 350px;
+  } @else if $screen == $tablet {
+    max-width: 750px;
+  } @else {
+    max-width: 992px;
+  }
+  display: flex;
+  width: 100%;
 }

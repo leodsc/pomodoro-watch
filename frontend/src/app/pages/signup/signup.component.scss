@@ -1,0 +1,11 @@
+@import "forms.scss";
+@import "_mixins";
+
+.signup-page {
+  height: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-image: url("../../../assets/background-signup.jpeg");
+  @include flexCtn(column, center, center, 0);
+}

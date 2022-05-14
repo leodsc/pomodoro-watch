@@ -1,7 +1,13 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
-import { TimerCircle } from 'app/classes/TimerCircle';
-import { Watch } from 'app/classes/Watch';
-import { MessageService } from 'app/services/message.service';
+
+import { Task } from '@models/Task';
+
+import { LocalStorageService } from '@services/local-storage.service';
+import { MessageService } from '@services/message.service';
+
+import { Watch } from '@classes/Watch';
+import { TimerCircle } from '@classes/TimerCircle';
+import { Time } from '@classes/Time';
 
 @Component({
   selector: 'app-main',
@@ -16,13 +22,30 @@ export class MainComponent implements OnInit {
   buttonSound = new Audio('assets/button-click.ogg');
   canvas: any = null;
   public readonly watch = new Watch(this.currentTime);
+  private task: Task;
   private readonly timerCircle = new TimerCircle(this.watch);
 
-  constructor(private messageService: MessageService) {}
+  constructor(
+    private messageService: MessageService,
+    private localStorageService: LocalStorageService
+  ) {}
 
   ngOnInit(): void {
+    this.listenToTimeChange();
+    const hasUnfinishedTask = this.localStorageService.checkUnfinishedTask();
+    if (hasUnfinishedTask) {
+      this.localStorageService.sendTask();
+    }
+    // if (hasUnfinishedTask) {
+    //   this.messageService.send('A última tarefa não foi finalizada!');
+    // }
+  }
+
+  listenToTimeChange() {
     this.watch.timeRemaining.subscribe((value: string) => {
       this.currentTime = value;
+      this.task.seconds++;
+      this.localStorageService.storeCurrentTaskTemporarily(this.task);
       if (this.currentTime == '00:00') {
         this.watch.isRunning = false;
         this.watch.alarm();
@@ -40,6 +63,9 @@ export class MainComponent implements OnInit {
   startTimer() {
     if (!this.timerCircle.exists()) {
       this.timerCircle.createCanvas();
+      this.task = new Task();
+      this.task.seconds = 0;
+      this.task.initialDate = new Date();
     }
     this.watch.start();
     this.toggleAnimation('assets/pause.png');

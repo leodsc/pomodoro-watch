@@ -28,7 +28,15 @@ $buttonColors: (
 
 .detail {
   position: absolute;
+  top: 25px;
+  z-index: -1;
   width: 100px;
-  height: 10px;
+  height: 54px;
   opacity: 0.5;
+
+  @each $color, $value in $buttonColors {
+    &__#{color} {
+      border-right: 5px solid $value;
+    }
+  }
 }

@@ -1,0 +1,104 @@
+<main class="signup-page">
+  <section class="form-ctn">
+    <form #signupForm="ngForm" class="form">
+      <h1 class="form-title">Cadastrar</h1>
+      <label for="name">
+        <input
+          (keydown)="showname()"
+          [(ngModel)]="user.name"
+          minlength="2"
+          maxlength="28"
+          required
+          #name="ngModel"
+          name="name"
+          id="name"
+          type="text"
+          placeholder="Nome"
+        />
+        <!-- <app-form-validation message="Mínimo de 2 caracteres" (validator)="">
+  
+        </app-form-validation> -->
+        <div class="invalid-info" [hidden]="name.valid || name.pristine">
+          Nome tem que ter pelo menos 2 letras
+        </div>
+      </label>
+      <label for="email">
+        <input
+          [(ngModel)]="user.email"
+          name="email"
+          id="email"
+          required
+          type="email"
+          email
+          #email="ngModel"
+          placeholder="Email"
+        />
+        <div class="invalid-info" [hidden]="email.valid || email.pristine">
+          E-mail não é válido
+        </div>
+      </label>
+      <label for="password">
+        <input
+          [(ngModel)]="user.password"
+          #password="ngModel"
+          name="password"
+          id="password"
+          type="password"
+          appPasswordValidator="teste"
+          placeholder="Senha"
+        />
+        <div class="invalid-info" [hidden]="!password.errors">
+          <div
+            class="invalid-info__reason"
+            [hidden]="!password.errors?.noUppercase"
+          >
+            {{ password.errors?.noUppercase }}
+          </div>
+          <div
+            class="invalid-info__reason"
+            [hidden]="!password.errors?.noLowercase"
+          >
+            {{ password.errors?.noLowercase }}
+          </div>
+          <div
+            class="invalid-info__reason"
+            [hidden]="!password.errors?.noSymbol"
+          >
+            {{ password.errors?.noSymbol }}
+          </div>
+          <div
+            class="invalid-info__reason"
+            [hidden]="!password.errors?.noNumber"
+          >
+            {{ password.errors?.noNumber }}
+          </div>
+          <div
+            class="invalid-info__reason"
+            [hidden]="!password.errors?.minimumCharacters"
+          >
+            {{ password.errors?.minimumCharacters }}
+          </div>
+        </div>
+      </label>
+      <label for="confirmPassword">
+        <input
+          [(ngModel)]="confirmPasswordModel"
+          name="confirmPassword"
+          id="confirmPassword"
+          #confirmPassword="ngModel"
+          type="password"
+          placeholder="Confirmar Senha"
+        />
+        <div
+          class="invalid-info"
+          [hidden]="
+            confirmPassword.pristine || confirmPassword.value === user.password
+          "
+        >
+          Senhas não são iguais
+        </div>
+      </label>
+      <button (click)="signup()" class="confirm-btn">Criar Conta</button>
+    </form>
+  </section>
+</main>

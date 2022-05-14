@@ -1,4 +1,7 @@
-<div (click)="pushed !== undefined ? changeCurrentButton() : null">
+<div
+  class="btn-ctn"
+  (click)="pushed !== undefined ? changeCurrentButton() : null"
+>
   <button #button [class]="'btn-color__' + color + ' btn-ctn'">
     {{ btnText }}
   </button>

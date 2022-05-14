@@ -6,10 +6,17 @@ $box-shadow-3d: 0 0 0px 4px rgba(255, 255, 255, 0.25);
 .initial-page {
   @include flexCtn(column, none, none, 5rem);
   height: 80%;
+
+  &-ctn {
+    margin: 0 auto;
+    flex-direction: column;
+    @include maximumContainerSize($mobile);
+  }
 }
 
 .watch-ctn {
   @include flexCtn(column, center, center, 4rem);
+  margin-top: 2rem;
 }
 
 .watch-icon {

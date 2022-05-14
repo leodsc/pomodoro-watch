@@ -1,9 +1,8 @@
 import { Observable, Subject } from 'rxjs';
+import { Time } from './Time';
 
 export class Watch {
-  private seconds: number;
-  private minutes: number;
-  private hours: number;
+  private time = new Time();
   private initialTime: string;
   private initialTimeTotalSeconds: number;
   private timer: ReturnType<typeof setTimeout>;
@@ -12,7 +11,7 @@ export class Watch {
 
   public isRunning: boolean;
   public timeRemaining = this.timeRemainingSource.asObservable();
-  public timeEllapsed: number;
+  public timeEllapsedPercentage: number;
   public stopped: boolean = true;
 
   constructor(time: string) {
@@ -24,16 +23,7 @@ export class Watch {
     this.stopped = false;
     this.timer = setInterval(() => {
       this.decreaseOneSecond();
-      let seconds = `${this.seconds}`;
-      let minutes = `${this.minutes}`;
-
-      if (this.seconds <= 9) {
-        seconds = '0' + seconds;
-      }
-      if (this.minutes <= 9) {
-        minutes = '0' + minutes;
-      }
-      this.timeRemainingSource.next(`${minutes}:${seconds}`);
+      this.timeRemainingSource.next(this.time.toString());
     }, 1000);
   }
 
@@ -48,7 +38,7 @@ export class Watch {
     this.timeRemainingSource.next(this.initialTime);
     this.setTime(this.initialTime);
     this.stopped = true;
-    this.timeEllapsed = 1;
+    this.timeEllapsedPercentage = 1;
   }
 
   restart() {
@@ -59,13 +49,13 @@ export class Watch {
   }
 
   decreaseOneSecond() {
-    if (this.seconds == 0 && this.minutes == 0) {
+    if (this.time.seconds == 0 && this.time.minutes == 0) {
       this.alarm();
-    } else if (this.seconds == 0) {
-      this.minutes -= 1;
-      this.seconds = 59;
+    } else if (this.time.seconds == 0) {
+      this.time.minutes -= 1;
+      this.time.seconds = 59;
     } else {
-      this.seconds -= 1;
+      this.time.seconds -= 1;
     }
     this.calculateTimeEllapsed();
   }
@@ -77,17 +67,18 @@ export class Watch {
 
   setTime(time: string) {
     const timeArray = time.split(':');
-    this.seconds = Number(timeArray[1]);
-    this.minutes = Number(timeArray[0]);
-    this.hours = Number(timeArray[0]);
+    this.time.seconds = Number(timeArray[1]);
+    this.time.minutes = Number(timeArray[0]);
+    // this.hours = Number(timeArray[0]);
     this.initialTime = time;
-    this.initialTimeTotalSeconds = this.minutes * 60 + this.seconds;
+    this.initialTimeTotalSeconds = this.time.minutes * 60 + this.time.seconds;
   }
 
   private calculateTimeEllapsed() {
     let secondsEllapsed =
-      this.initialTimeTotalSeconds - (this.minutes * 60 + this.seconds);
-    this.timeEllapsed = secondsEllapsed / this.initialTimeTotalSeconds;
-    console.log(this.timeEllapsed);
+      this.initialTimeTotalSeconds -
+      (this.time.minutes * 60 + this.time.seconds);
+    this.timeEllapsedPercentage =
+      secondsEllapsed / this.initialTimeTotalSeconds;
   }
 }

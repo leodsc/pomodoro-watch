@@ -1,27 +1,29 @@
 <div *ngIf="showNav" class="page-blocker"></div>
 <header class="header">
-  <button
-    class="header__button"
-    [class]="showNav ? 'translate-button' : null"
-    (click)="toggleNavigation()"
-  >
-    <div class="line" [class]="showNav ? 'translate-clockwise' : null"></div>
-    <div
-      class="line"
-      [class]="showNav ? 'translate-anti-clockwise' : null"
-    ></div>
-  </button>
-  <nav class="header__nav" [class]="showNav ? 'move-in' : null">
-    <ul class="nav__links-ctn">
-      <li class="nav__link-ctn">
-        <a class="link" routerLink="/">Início</a>
-      </li>
-      <li class="nav__link-ctn">
-        <a class="link" routerLink="/entrar">Entrar</a>
-      </li>
-      <li class="nav__link-ctn">
-        <a class="link" routerLink="/cadastrar">Cadastrar</a>
-      </li>
-    </ul>
-  </nav>
+  <div class="header-ctn">
+    <button
+      class="header__button"
+      [class]="showNav ? 'translate-button' : null"
+      (click)="toggleNavigation()"
+    >
+      <div class="line" [class]="showNav ? 'translate-clockwise' : null"></div>
+      <div
+        class="line"
+        [class]="showNav ? 'translate-anti-clockwise' : null"
+      ></div>
+    </button>
+    <nav class="header__nav" [class]="showNav ? 'move-in' : null">
+      <ul class="nav__links-ctn">
+        <li class="nav__link-ctn">
+          <a class="link" routerLink="/">Início</a>
+        </li>
+        <li class="nav__link-ctn">
+          <a class="link" routerLink="/entrar">Entrar</a>
+        </li>
+        <li class="nav__link-ctn">
+          <a class="link" routerLink="/cadastrar">Cadastrar</a>
+        </li>
+      </ul>
+    </nav>
+  </div>
 </header>

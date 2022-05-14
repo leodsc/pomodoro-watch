@@ -12,7 +12,7 @@ export class HeaderComponent implements OnInit {
   constructor(private router: Router) {
     router.events.subscribe((val) => {
       if (val instanceof NavigationEnd) {
-        this.toggleNavigation();
+        this.showNav = false;
       }
     });
   }
