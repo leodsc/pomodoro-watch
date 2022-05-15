@@ -32,10 +32,6 @@ export class MainComponent implements OnInit {
 
   ngOnInit(): void {
     this.listenToTimeChange();
-    const hasUnfinishedTask = this.localStorageService.checkUnfinishedTask();
-    if (hasUnfinishedTask) {
-      this.localStorageService.sendTask();
-    }
     // if (hasUnfinishedTask) {
     //   this.messageService.send('A última tarefa não foi finalizada!');
     // }

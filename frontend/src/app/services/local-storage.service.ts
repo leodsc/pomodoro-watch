@@ -1,5 +1,8 @@
 import { Injectable } from '@angular/core';
+import { ITask } from '@models/ITask';
 import { Task } from '@models/Task';
+import { User } from '@models/User';
+import { MessageService } from './message.service';
 import { UserService } from './user.service';
 
 @Injectable({
@@ -7,13 +10,25 @@ import { UserService } from './user.service';
 })
 export class LocalStorageService {
   currentTask = new Task();
-  constructor(private userService: UserService) {}
+  constructor(
+    private userService: UserService,
+    private messageService: MessageService
+  ) {}
 
   loadUserUUID() {
-    if (localStorage.getItem('PomodoroUserUUID') == null) {
-      this.setItem('PomodoroUserUUID', crypto.randomUUID());
+    if (this.getItem('PomodoroUserUUID') == null) {
+      this.userService.createUUID();
+      this.setItem('PomodoroUserUUID', this.userService.user.randomUUID!);
+    } else {
+      this.userService
+        .getUser(this.getItem('PomodoroUserUUID')!)
+        .subscribe((user) => {
+          this.userService.user.id = user.id;
+          if (this.hasUnfinishedTask()) {
+            this.sendTask();
+          }
+        });
     }
-    this.userService.UUID = this.getItem('PomodoroUserUUID')!;
   }
 
   storeCurrentTaskTemporarily(task: Task) {
@@ -28,14 +43,28 @@ export class LocalStorageService {
     localStorage.setItem(item, value);
   }
 
-  checkUnfinishedTask() {
-    return this.getItem('task') != '';
+  private hasUnfinishedTask() {
+    return this.getItem('task') != null;
   }
 
-  sendTask() {
-    this.userService.sendTask(this.currentTask).subscribe((task) => {
-      this.currentTask = new Task();
-      this.setItem('task', '');
-    });
+  async sendTask() {
+    const parsedJson = await JSON.parse(this.getItem('task')!);
+    const task = <ITask>parsedJson;
+    task.user = this.userService.user;
+    this.userService.sendTask(task).subscribe(
+      (task) => {
+        task.name == null
+          ? this.messageService.send(
+              'Sua última tarefa teve o tempo salvo com sucesso!'
+            )
+          : this.messageService.send(
+              `Sua tarefa ${task.name} teve o tempo salvo com sucesso!`
+            );
+        this.setItem('task', '');
+      },
+      (error) => {
+        this.messageService.send('Ocorreu um erro ao salvar a última tarefa');
+      }
+    );
   }
 }

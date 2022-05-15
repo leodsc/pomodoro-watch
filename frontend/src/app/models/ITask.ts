@@ -1,11 +1,10 @@
-import { ITask } from './ITask';
 import { User } from './User';
 
-export class Task implements ITask {
+export interface ITask {
   id: number;
   initialDate: Date;
   finishDate: Date;
   seconds: number;
-  name?: string | undefined;
+  name?: string;
   user: User;
 }

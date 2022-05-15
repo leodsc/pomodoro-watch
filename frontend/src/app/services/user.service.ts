@@ -9,36 +9,40 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class UserService {
-  private _authenticated: boolean;
-  private _UUID: string;
+  public authenticated: boolean;
   private _user = new User();
 
   constructor(private http: HttpClient) {}
 
   get user(): User {
-    return this.user;
+    return this._user;
   }
 
-  get authenticated(): boolean {
-    return this._authenticated;
-  }
-
-  set authenticated(value: boolean) {
-    this._authenticated = value;
-  }
-
-  get UUID(): string {
-    return this._UUID;
-  }
-
-  set UUID(value: string) {
+  createUUID() {
     this.authenticated = false;
-    this._UUID = value;
-    this._user.randomUUID = this._UUID;
+    this.user.randomUUID = crypto.randomUUID();
+    this.create().subscribe((user) => {
+      this.user.id = user.id;
+    });
   }
 
   sendTask(task: Task): Observable<Task> {
-    task.finishDate = new Date();
-    return this.http.post<Task>(environment.server + 'task', task);
+    return this.http.post<Task>(environment.server + 'tasks', task);
+  }
+
+  getUser(UUID: string): Observable<User> {
+    return this.http.get<User>(environment.server + `users/randomUUID/${UUID}`);
+  }
+
+  create(): Observable<User> {
+    return this.http.post<User>(
+      environment.server + 'users/signup',
+      this.user,
+      {
+        params: {
+          withUserUUID: true,
+        },
+      }
+    );
   }
 }
