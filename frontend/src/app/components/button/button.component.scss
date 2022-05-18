@@ -40,3 +40,9 @@ $buttonColors: (
     }
   }
 }
+
+@media (min-width: 992px) {
+  .detail {
+    top: 42px;
+  }
+}

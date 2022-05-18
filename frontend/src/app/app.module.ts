@@ -15,6 +15,9 @@ import { FormValidationComponent } from './components/form-validation/form-valid
 
 import { EmailvalidatorDirective } from './directives/validation/emailvalidator.directive';
 import { PasswordValidatorDirective } from './directives/validation/password-validator.directive';
+import { NgChartsModule } from 'ng2-charts';
+import { TrackComponent } from './pages/track/track.component';
+import { TranslatePipe } from './pipes/translate.pipe';
 
 @NgModule({
   declarations: [
@@ -28,8 +31,10 @@ import { PasswordValidatorDirective } from './directives/validation/password-val
     FormValidationComponent,
     EmailvalidatorDirective,
     PasswordValidatorDirective,
+    TrackComponent,
+    TranslatePipe,
   ],
-  imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
+  imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule, NgChartsModule],
   providers: [],
   bootstrap: [AppComponent],
 })

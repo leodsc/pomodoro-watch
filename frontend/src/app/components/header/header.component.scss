@@ -1,25 +1,22 @@
 @import "_mixins";
 
 $icons: (
-  "../../../assets/close.png",
-  "../../../assets/close.png",
-  "../../../assets/close.png"
+  "../../../assets/icons/home.png",
+  "../../../assets/icons/data.png",
+  "../../../assets/icons/user.png",
+  "../../../assets/icons/signup.png"
 );
 
 .header {
-  position: absolute;
-  padding-top: 0.5rem;
   padding-left: 0.5rem;
   padding-bottom: 0.5rem;
   border-bottom: 3px solid rgba(0, 0, 0, 0.25);
   @include flexCtn(row, center, center, 0);
   height: 75px;
   width: 100vw;
+  position: fixed;
+  z-index: 500;
   background-color: #2f374a;
-
-  &-ctn {
-    @include maximumContainerSize($mobile);
-  }
 
   &__button {
     position: relative;
@@ -45,25 +42,22 @@ $icons: (
     max-width: 300px;
     width: 50%;
     background-color: white;
+    top: 0;
     position: fixed;
     left: -50%;
     z-index: 499;
     transition: all 500ms;
-    padding-top: 18rem;
-    padding-bottom: 2rem;
+    padding-top: 5rem;
     border-bottom-right-radius: 10px;
-
-    @for $i from 1 through 3 {
-      $icon: nth($icons, $i);
-      .nav__link-ctn:nth-child(#{$i}) {
-        list-style-image: url(#{$icon});
-      }
-    }
 
     .nav__link-ctn {
       padding: 1rem;
       padding-left: 1rem;
       color: #212121;
+      font-size: 1.25rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
 
       @for $i from 1 through 4 {
         &:nth-child(#{$i}) {
@@ -80,7 +74,6 @@ $icons: (
         position: relative;
         top: -5px;
         padding-left: 0.5rem;
-        font-size: 1.25rem;
       }
     }
   }
@@ -90,7 +83,8 @@ $icons: (
 
 .translate {
   &-button {
-    height: 60px;
+    position: absolute;
+    left: 30px;
   }
 
   &-clockwise {
@@ -111,4 +105,22 @@ $icons: (
 
 .move-in {
   left: 0;
+}
+
+@media (max-width: 540px) {
+  .center-content {
+    @include maximumContainerSize($mobile);
+  }
+}
+
+@media (min-width: 541px) and (max-width: 991px) {
+  .center-content {
+    @include maximumContainerSize($tablet);
+  }
+}
+
+@media (min-width: 992px) {
+  .center-content {
+    @include maximumContainerSize($desktop);
+  }
 }

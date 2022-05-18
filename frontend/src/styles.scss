@@ -1,6 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 
 @import "_variables";
+@import "_mixins";
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700;800&display=swap");
 
 * {
@@ -31,7 +32,7 @@ body {
 
 main {
   // prevent page to overlap header
-  padding-top: 7rem;
+  padding-top: 5rem;
 }
 
 .page-blocker {
@@ -40,4 +41,26 @@ main {
   z-index: 400;
   height: 100%;
   width: 100%;
+}
+
+@media (max-width: 540px) {
+  .center-content {
+    @include maximumContainerSize($mobile);
+  }
+}
+
+@media (min-width: 541px) and (max-width: 991px) {
+  .center-content {
+    @include maximumContainerSize($tablet);
+  }
+}
+
+@media (min-width: 992px) {
+  :root {
+    font-size: 20px;
+  }
+
+  .center-content {
+    @include maximumContainerSize($desktop);
+  }
 }

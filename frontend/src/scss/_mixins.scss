@@ -12,10 +12,30 @@
   @if $screen == $mobile {
     max-width: 350px;
   } @else if $screen == $tablet {
-    max-width: 750px;
+    max-width: 550px;
   } @else {
     max-width: 992px;
   }
   display: flex;
   width: 100%;
+
+  &-main {
+    margin: 0 auto;
+  }
+}
+
+@mixin containerBackground($backgrounds) {
+  @each $background, $query in $backgrounds {
+    @if $query == "" {
+      .background {
+        background-image: url($background);
+      }
+    } @else {
+      @media (min-width: $query) {
+        .background {
+          background-image: url($background);
+        }
+      }
+    }
+  }
 }

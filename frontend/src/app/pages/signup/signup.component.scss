@@ -6,6 +6,11 @@
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  background-image: url("../../../assets/background-signup.jpeg");
   @include flexCtn(column, center, center, 0);
 }
+
+$backgrounds: (
+  "/assets/background-signup.jpeg": "",
+  "/assets/backgrounds/desktop-signup.webp": 638px,
+);
+@include containerBackground($backgrounds);

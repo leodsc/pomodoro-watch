@@ -1,10 +1,17 @@
 @import "_mixins";
 @import "forms.scss";
+@import "_functions.scss";
 
 .login-page {
   @include flexCtn(column, center, center, 1rem);
-  background: url("../../../assets/login-background.png") no-repeat;
   background-size: cover;
   background-position: center;
+  background-repeat: no-repeat;
   height: 100%;
 }
+
+$backgrounds: (
+  "/assets/login-background.png": "",
+  "/assets/backgrounds/desktop-login.webp": 638px,
+);
+@include containerBackground($backgrounds);

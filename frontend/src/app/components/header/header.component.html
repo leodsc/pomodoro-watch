@@ -1,6 +1,6 @@
 <div *ngIf="showNav" class="page-blocker"></div>
 <header class="header">
-  <div class="header-ctn">
+  <div class="center-content">
     <button
       class="header__button"
       [class]="showNav ? 'translate-button' : null"
@@ -14,15 +14,13 @@
     </button>
     <nav class="header__nav" [class]="showNav ? 'move-in' : null">
       <ul class="nav__links-ctn">
-        <li class="nav__link-ctn">
-          <a class="link" routerLink="/">Início</a>
-        </li>
-        <li class="nav__link-ctn">
-          <a class="link" routerLink="/entrar">Entrar</a>
-        </li>
-        <li class="nav__link-ctn">
-          <a class="link" routerLink="/cadastrar">Cadastrar</a>
-        </li>
+        <a class="link" *ngFor="let link of links" [routerLink]="link.path">
+          <li class="nav__link-ctn">
+            <img [src]="link.icon" alt="" width="40" />
+
+            {{ link.name }}
+          </li>
+        </a>
       </ul>
     </nav>
   </div>

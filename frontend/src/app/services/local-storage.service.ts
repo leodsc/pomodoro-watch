@@ -43,6 +43,10 @@ export class LocalStorageService {
     localStorage.setItem(item, value);
   }
 
+  removeItem(item: string) {
+    localStorage.removeItem(item);
+  }
+
   private hasUnfinishedTask() {
     return this.getItem('task') != null;
   }
@@ -60,7 +64,7 @@ export class LocalStorageService {
           : this.messageService.send(
               `Sua tarefa ${task.name} teve o tempo salvo com sucesso!`
             );
-        this.setItem('task', '');
+        this.removeItem('task');
       },
       (error) => {
         this.messageService.send('Ocorreu um erro ao salvar a última tarefa');

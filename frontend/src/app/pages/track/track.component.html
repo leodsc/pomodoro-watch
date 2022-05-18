@@ -1,0 +1,61 @@
+<main class="track-page">
+  <div class="center-content center-content-main">
+    <section class="ctn">
+      <select
+        [(ngModel)]="time"
+        class="time"
+        name=""
+        id=""
+        (change)="loadData()"
+      >
+        <option hidden value="">Selecione um período</option>
+        <option *ngFor="let option of options | keyvalue" [value]="option.key">
+          {{ option.value }}
+        </option>
+      </select>
+    </section>
+  </div>
+  <div
+    *ngIf="data.length != 0"
+    class="data-ctn"
+    [ngStyle]="{ 'max-width': '550px' }"
+  >
+    <canvas
+      class="data"
+      baseChart
+      [legend]="false"
+      [type]="'bar'"
+      [options]="{
+        scales: {
+          x: {
+            display: true,
+            title: {
+              display: true,
+              text: time | translate,
+              color: '#222',
+              font: {
+                size: 20
+              }
+            }
+          },
+          y: {
+            display: true,
+            title: {
+              display: true,
+              text: yLabel | translate,
+              color: '#222',
+              font: {
+                size: 24
+              }
+            }
+          }
+        }
+      }"
+      [datasets]="[
+        {
+          data: data
+        }
+      ]"
+    ></canvas>
+  </div>
+</main>
