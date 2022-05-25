@@ -14,11 +14,15 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.logging.LogManager;
+import java.util.logging.Logger;
 
 @RestController
 @RequestMapping("users")
 @CrossOrigin("*")
 public class UserController {
+
+    private final Logger logger = Logger.getLogger("User controller");
 
     @Autowired
     private UserService userService;
@@ -30,12 +34,14 @@ public class UserController {
 
     @GetMapping("randomUUID/{uuid}")
     public ResponseEntity<UserModel> getUserById(@PathVariable String uuid) {
+        logger.info(String.format("User with uuid %s enter the app!", uuid));
         return ResponseEntity.ok(userService.findUserByUuid(uuid));
     }
 
     @PostMapping("/signup")
     public ResponseEntity<UserModel> signup(@RequestBody UserModel user, @RequestParam boolean withUserUUID) {
         if (withUserUUID) {
+            logger.info(String.format("User with uuid %s signup!", user.getRandomUUID()));
             return ResponseEntity.ok(userService.createUserWithRandomUUID(user));
         } else {
             try {

@@ -29,4 +29,8 @@ public class UserModel {
     @OneToMany(mappedBy="user", cascade= {CascadeType.ALL})
     @JsonIgnoreProperties("user")
     private List<TaskModel> tasks;
+
+//    public UserModel(String randomUUID) {
+//        this.randomUUID = randomUUID;
+//    }
 }

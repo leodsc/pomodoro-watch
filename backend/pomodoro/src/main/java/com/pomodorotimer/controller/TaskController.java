@@ -9,11 +9,14 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.logging.Logger;
 
 @RestController
 @RequestMapping("/tasks")
 @CrossOrigin("*")
 public class TaskController {
+
+    private final Logger logger = Logger.getLogger("Task controller");
 
     @Autowired
     private TaskService taskService;
@@ -31,6 +34,7 @@ public class TaskController {
 
     @GetMapping("/data/{timing}")
     public ResponseEntity<?> createData(@RequestParam("id") Long id, @PathVariable String timing) {
+        logger.info("Checking data...");
         var result = taskService.createData(id, timing);
         System.out.println(result.get(0).toString());
         return ResponseEntity.ok(result);

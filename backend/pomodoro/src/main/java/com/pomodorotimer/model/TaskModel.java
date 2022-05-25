@@ -18,11 +18,11 @@ public class TaskModel {
     private Long id;
 
     @NotNull
-    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.TIMESTAMP)
     private Date initialDate;
 
     @NotNull
-    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.TIMESTAMP)
     private Date finishDate = new Date();
 
     @NotNull
