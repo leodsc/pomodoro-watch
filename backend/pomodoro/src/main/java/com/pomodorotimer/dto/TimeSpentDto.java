@@ -49,7 +49,7 @@ public class TimeSpentDto {
     }
 
     private void convertDay(TimeTrack timeSpent) {
-        DayOfWeek day = DayOfWeek.of(timeSpent.getTimeUnit()+1);
+        DayOfWeek day = DayOfWeek.of(timeSpent.getTimeUnit());
         String dayName = day.getDisplayName(TextStyle.FULL, locale);
         var daily = new Daily(convertedTotalSeconds, dayName, greaterFormat);
         timeSpentDto.add(daily);

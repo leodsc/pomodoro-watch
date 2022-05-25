@@ -28,7 +28,6 @@ public class TaskController {
 
     @PostMapping
     public TaskModel createTask(@RequestBody TaskModel task) {
-        System.out.println(task.toString());
         return taskService.create(task);
     }
 
@@ -36,7 +35,7 @@ public class TaskController {
     public ResponseEntity<?> createData(@RequestParam("id") Long id, @PathVariable String timing) {
         logger.info("Checking data...");
         var result = taskService.createData(id, timing);
-        System.out.println(result.get(0).toString());
+        System.out.println(result.toString());
         return ResponseEntity.ok(result);
     }
 
