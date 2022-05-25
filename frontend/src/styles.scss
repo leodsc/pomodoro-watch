@@ -43,6 +43,14 @@ main {
   width: 100%;
 }
 
+.modal {
+  position: relative;
+  margin: 0 auto;
+  background-color: white;
+  width: 300px;
+  padding: 2rem;
+}
+
 @media (max-width: 540px) {
   .center-content {
     @include maximumContainerSize($mobile);

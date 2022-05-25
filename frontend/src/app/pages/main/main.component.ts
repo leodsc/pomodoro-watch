@@ -17,10 +17,11 @@ import { Time } from '@classes/Time';
 export class MainComponent implements OnInit {
   currentTime = '25:00';
   animation: string = 'button-animation--off';
-  icon = 'assets/play.png';
+  icon = 'assets/play.svg';
   showMessage = false;
   buttonSound = new Audio('assets/button-click.ogg');
   canvas: any = null;
+  public changeTimeModal: boolean = false;
   public readonly watch = new Watch(this.currentTime);
   private task: Task;
   private readonly timerCircle = new TimerCircle(this.watch);
@@ -45,7 +46,7 @@ export class MainComponent implements OnInit {
       if (this.currentTime == '00:00') {
         this.watch.isRunning = false;
         this.watch.alarm();
-        this.toggleAnimation('assets/play.png');
+        this.toggleAnimation('assets/play.svg');
       }
     });
   }
@@ -69,7 +70,7 @@ export class MainComponent implements OnInit {
 
   pauseTimer() {
     this.watch.pause();
-    this.toggleAnimation('assets/play.png');
+    this.toggleAnimation('assets/play.svg');
   }
 
   toggleAnimation(newIcon: string) {
@@ -99,7 +100,7 @@ export class MainComponent implements OnInit {
 
   stop() {
     if (!this.watch.stopped) {
-      this.toggleAnimation('assets/play.png');
+      this.toggleAnimation('assets/play.svg');
     }
     this.watch.stop();
     this.timerCircle.remove();

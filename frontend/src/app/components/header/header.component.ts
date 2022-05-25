@@ -11,10 +11,11 @@ export class HeaderComponent implements OnInit {
   links: HeaderLink[] = [
     new HeaderLink('Início', 'assets/icons/home.png', '/'),
     new HeaderLink('Dados', 'assets/icons/data.png', '/uso'),
-    new HeaderLink('Entrar', 'assets/icons/user.png', '/entrar'),
-    new HeaderLink('Cadastrar', 'assets/icons/signup.png', '/cadastrar'),
+    // new HeaderLink('Entrar', 'assets/icons/user.png', '/entrar'),
+    // new HeaderLink('Cadastrar', 'assets/icons/signup.png', '/cadastrar'),
   ];
   showNav = false;
+  show: boolean = false;
 
   constructor(private router: Router) {
     router.events.subscribe((val) => {
@@ -28,5 +29,9 @@ export class HeaderComponent implements OnInit {
 
   toggleNavigation() {
     this.showNav = !this.showNav;
+  }
+
+  showModal() {
+    this.show = true;
   }
 }

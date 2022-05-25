@@ -13,7 +13,6 @@ export class TrackComponent implements OnInit {
   data: any = [];
   yLabel: string = 'SECOND';
   time: string = '';
-  teste = 'oi';
 
   constructor(private taskService: TaskService) {}
 

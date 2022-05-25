@@ -18,6 +18,7 @@ import { PasswordValidatorDirective } from './directives/validation/password-val
 import { NgChartsModule } from 'ng2-charts';
 import { TrackComponent } from './pages/track/track.component';
 import { TranslatePipe } from './pipes/translate.pipe';
+import { ModalComponent } from './components/modal/modal.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { TranslatePipe } from './pipes/translate.pipe';
     PasswordValidatorDirective,
     TrackComponent,
     TranslatePipe,
+    ModalComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule, NgChartsModule],
   providers: [],

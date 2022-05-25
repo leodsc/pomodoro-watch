@@ -22,13 +22,25 @@
       ></app-button>
     </section>
     <section class="watch-ctn">
-      <h2 class="time">{{ currentTime }}</h2>
+      <div class="timer-ctn">
+        <h2 class="time">{{ currentTime }}</h2>
+        <button>
+          <img width="64" height="64" src="assets/icons/Edit.svg" alt="" />
+        </button>
+      </div>
       <div id="watch" class="watch">
         <button
           [class]="animation"
           (click)="watch.isRunning ? pauseTimer() : startTimer()"
         >
-          <img class="watch-icon" [src]="icon" alt="" />
+          <img
+            [style.left]="icon.endsWith('play.svg') ? '10px' : null"
+            class="watch-icon"
+            width="128"
+            height="128"
+            [src]="icon"
+            alt=""
+          />
         </button>
       </div>
       <section class="center btns gap-1">

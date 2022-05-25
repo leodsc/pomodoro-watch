@@ -1,6 +1,6 @@
 <div *ngIf="showNav" class="page-blocker"></div>
 <header class="header">
-  <div class="center-content">
+  <div class="center-content" [style]="{ 'justify-content': 'space-between' }">
     <button
       class="header__button"
       [class]="showNav ? 'translate-button' : null"
@@ -17,11 +17,15 @@
         <a class="link" *ngFor="let link of links" [routerLink]="link.path">
           <li class="nav__link-ctn">
             <img [src]="link.icon" alt="" width="40" />
-
             {{ link.name }}
           </li>
         </a>
       </ul>
     </nav>
+    <!-- <app-button
+      (click)="showModal()"
+      text="Mudar tempos"
+      color="purple"
+    ></app-button> -->
   </div>
 </header>
