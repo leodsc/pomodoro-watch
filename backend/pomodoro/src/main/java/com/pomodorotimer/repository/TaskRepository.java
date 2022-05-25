@@ -21,7 +21,7 @@ public interface TaskRepository extends JpaRepository<TaskModel, Long> {
             "GROUP BY WEEK(initial_date);", nativeQuery = true)
     List<TimeTrack> fetchAllDataWeekly(Long id);
 
-    @Query(value="SELECT SUM(seconds) AS totalSeconds, MONTH(initial_date) AS timeUnit " +
+    @Query(value="SELECT SUM(seconds) AS totalSeconds, EXTRACT(MONTH FROM TIMESTAMP initial_date) AS timeUnit " +
             "FROM tasks " +
             "GROUP BY MONTH(initial_date);", nativeQuery = true)
     List<TimeTrack> fetchAllDataMonthly(Long id);
