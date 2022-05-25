@@ -3,6 +3,28 @@
 
 $box-shadow-3d: 0 0 0px 4px rgba(255, 255, 255, 0.25);
 
+:host ::ng-deep {
+  .p-dialog {
+    @include flexCtn(column, center, center, 1rem);
+    background-color: white;
+    padding: 1rem 0;
+    text-align: justify;
+    width: 80vw;
+    border-radius: 5px;
+
+    &-title {
+      font-size: 2rem;
+    }
+  }
+}
+
+input {
+  border: 1px solid rgba(0, 0, 0, 0.25);
+  padding: 1rem;
+  max-width: 100px;
+  margin-left: 0;
+}
+
 .initial-page {
   @include flexCtn(column, none, none, 5rem);
   height: 80%;

@@ -15,6 +15,7 @@ import { Time } from '@classes/Time';
   styleUrls: ['./main.component.scss'],
 })
 export class MainComponent implements OnInit {
+  display: boolean = false;
   currentTime = '25:00';
   animation: string = 'button-animation--off';
   icon = 'assets/play.svg';

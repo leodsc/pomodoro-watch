@@ -1,4 +1,22 @@
 <app-message></app-message>
+<p-dialog header="Alterar relógio" position="top" [(visible)]="display">
+  <ng-template pTemplate="form">
+    <form action="">
+      <label for="">
+        Minutos
+        <input type="number" />
+      </label>
+    </form>
+  </ng-template>
+  <ng-template pTemplate="footer">
+    <p-button
+      icon="pi pi-check"
+      (click)="display = false"
+      label="Ok"
+      styleClass="p-button-text"
+    ></p-button>
+  </ng-template>
+</p-dialog>
 <main class="initial-page">
   <article class="center-content-main">
     <section class="btn-ctn center">
@@ -22,12 +40,12 @@
       ></app-button>
     </section>
     <section class="watch-ctn">
-      <div class="timer-ctn">
-        <h2 class="time">{{ currentTime }}</h2>
-        <button>
+      <!-- <div class="timer-ctn"> -->
+      <h2 class="time">{{ currentTime }}</h2>
+      <!-- <button (click)="display = true">
           <img width="64" height="64" src="assets/icons/Edit.svg" alt="" />
-        </button>
-      </div>
+        </button> -->
+      <!-- </div> -->
       <div id="watch" class="watch">
         <button
           [class]="animation"

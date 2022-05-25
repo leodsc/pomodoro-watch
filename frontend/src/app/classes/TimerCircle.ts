@@ -47,7 +47,7 @@ export class TimerCircle {
         p.TWO_PI - p.TWO_PI * this.watch.timeEllapsedPercentage
       );
       canvas.parent('watch');
-      canvas.position(-80, -65);
+      canvas.position(-78, -65);
 
       if (this.watch.stopped) {
         p.remove();
