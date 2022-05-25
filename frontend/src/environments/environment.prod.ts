@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  server: '',
+  server: 'https://pomodoro-leodsc.herokuapp.com/',
 };

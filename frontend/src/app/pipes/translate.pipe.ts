@@ -5,7 +5,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class TranslatePipe implements PipeTransform {
   translations = {
-    SECONDS: 'Segundos',
+    SECOND: 'Segundos',
     MINUTE: 'Minutos',
     DAYS: 'Dias',
     HOURS: 'Horas',

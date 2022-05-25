@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ITask } from '@models/ITask';
 import { Task } from '@models/Task';
-import { User } from '@models/User';
 import { MessageService } from './message.service';
 import { UserService } from './user.service';
 
@@ -55,8 +54,10 @@ export class LocalStorageService {
     const parsedJson = await JSON.parse(this.getItem('task')!);
     const task = <ITask>parsedJson;
     task.user = this.userService.user;
+    console.log(task);
     this.userService.sendTask(task).subscribe(
       (task) => {
+        console.log(task);
         task.name == null
           ? this.messageService.send(
               'Sua última tarefa teve o tempo salvo com sucesso!'
